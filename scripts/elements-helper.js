@@ -95,7 +95,6 @@ class QuizElementsHelper {
     this.quizCard.metaQCElm.innerText = this.quiz._questions.length;
     this.quizCard.metaTimeElm.innerText = `${this.quiz._time}s`;
     this.quizCard.image.src = this.quiz._image;
-    console.log(quiz);
     this.quizCard.classList.add('show');
   }
 

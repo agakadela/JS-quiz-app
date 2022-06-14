@@ -8,79 +8,13 @@ const resultCard = document.getElementById('result-card');
 let quiz;
 
 function initApp() {
-  const questions = [
-    {
-      title: 'Which one is the type of a javascript file?',
-      options: ['.ts', '.js', '.jsx', '.j'],
-    },
-    {
-      title: 'Inside which HTML element do we put the JavaScript?',
-      options: ['<scripting>', '<script>', '<js>', '<javascript>'],
-    },
-    {
-      title: 'Where is the correct place to insert a JavaScript?',
-      options: [
-        'The <head> section',
-        'Both the <head> section and the <body> section are correct',
-        'The <body> section',
-        'Anywhere in the HTML document',
-      ],
-    },
-    {
-      title:
-        'What is the correct syntax for referring to an external script called "xxx.js"?',
-      options: [
-        '<script name="xxx.js">',
-        '<script src="xxx.js">',
-        '<script link="xxx.js">',
-        '<script href="xxx.js">',
-      ],
-    },
-    {
-      title: 'How do you write "Hello World" in an alert box?',
-      options: [
-        'msg("Hello World");',
-        'alert("Hello World");',
-        'msgBox("Hello World");',
-        'console.log("Hello World");',
-      ],
-    },
-    {
-      title: 'How do you create a normal function in JavaScript?',
-      options: [
-        'function:myFunction()',
-        'function myFunction()',
-        'function* myFunction()',
-        'function = myFunction()',
-      ],
-    },
-    {
-      title: 'How do you call a function named "myFunction"?',
-      options: [
-        'call myFunction()',
-        'myFunction()',
-        'call:myFunction()',
-        'alo myFunction()',
-      ],
-    },
-  ];
-  const quizSettings = {
-    title: 'JavaScript Quiz',
-    description: 'Test your JavaScript knowledge',
-    questions: questions,
-    time: 60,
-    image: 'img/Untitled design.png',
-  };
+  fetch('data/data.json')
+    .then((response) => response.json())
+    .then(({ title, description, time, questions, image }) => {
+      quiz = new Quiz(title, description, time, questions, image);
 
-  quiz = new Quiz(
-    quizSettings.title,
-    quizSettings.description,
-    quizSettings.time,
-    questions,
-    quizSettings.image
-  );
-
-  new QuizElementsHelper(app, quizCard, questionsCard, resultCard, quiz);
+      new QuizElementsHelper(app, quizCard, questionsCard, resultCard, quiz);
+    });
 }
 
 initApp();
