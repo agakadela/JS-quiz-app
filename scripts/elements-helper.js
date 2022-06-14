@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class QuizElementsHelper {
   constructor(app, quizCard, questionCard, resultCard, quiz) {
@@ -21,69 +21,70 @@ class QuizElementsHelper {
   assignElements() {
     // Quiz Card Elements
     this.quizCard.startBtn = this.quizCard.querySelector(
-      ".quiz-details__start-btn"
+      '.quiz-details__start-btn'
     );
     this.quizCard.titleElm = this.quizCard.querySelector(
-      ".quiz-details__title"
+      '.quiz-details__title'
     );
     this.quizCard.descriptionElm = this.quizCard.querySelector(
-      ".quiz-details__description"
+      '.quiz-details__description'
     );
     this.quizCard.metaQCElm = this.quizCard.querySelector(
-      ".quiz-details__meta.--qc strong"
+      '.quiz-details__meta.--qc strong'
     );
     this.quizCard.metaTimeElm = this.quizCard.querySelector(
-      ".quiz-details__meta.--t strong"
+      '.quiz-details__meta.--t strong'
     );
+    this.quizCard.image = this.quizCard.querySelector('.quiz-details__image');
 
     // Question Card Elements
     this.questionCard.progressRemainingTimeElm = document.querySelector(
-      ".questions-card__remaining-time"
+      '.questions-card__remaining-time'
     );
     this.questionCard.progressQuestionCountElm = document.querySelector(
-      ".questions-card__q-count"
+      '.questions-card__q-count'
     );
     this.questionCard.progressbarElm = document.querySelector(
-      ".questions-card__progress .--value"
+      '.questions-card__progress .--value'
     );
-    this.questionCard.questionTitleElm = document.getElementById(
-      "question-title"
-    );
+    this.questionCard.questionTitleElm =
+      document.getElementById('question-title');
     this.questionCard.optionOneElm = document.querySelector(
-      "#option-one ~ label"
+      '#option-one ~ label'
     );
     this.questionCard.optionTwoElm = document.querySelector(
-      "#option-two ~ label"
+      '#option-two ~ label'
     );
     this.questionCard.optionThreeElm = document.querySelector(
-      "#option-three ~ label"
+      '#option-three ~ label'
     );
     this.questionCard.optionFourElm = document.querySelector(
-      "#option-four ~ label"
+      '#option-four ~ label'
     );
-    this.questionCard.nextBtn = this.app.querySelector("#next-btn");
-    this.questionCard.stopBtn = this.app.querySelector("#stop-btn");
+    this.questionCard.nextBtn = this.app.querySelector('#next-btn');
+    this.questionCard.stopBtn = this.app.querySelector('#stop-btn');
 
     // Result Card Elements
-    this.resultCard.gotoHome = this.resultCard.querySelector("#go-to-home");
-    this.resultCard.scoreElm = this.resultCard.querySelector("#score");
+    this.resultCard.gotoHome = this.resultCard.querySelector('#go-to-home');
+    this.resultCard.scoreElm = this.resultCard.querySelector('#score');
+    this.resultCard.scoreAdd = this.resultCard.querySelector('#score-add');
   }
 
   initListeners() {
     this.quizCard.startBtn.addEventListener(
-      "click",
+      'click',
       this.showQuestionsCard.bind(this)
     );
     this.questionCard.nextBtn.addEventListener(
-      "click",
+      'click',
       this.nextBtnHandler.bind(this)
     );
     this.questionCard.stopBtn.addEventListener(
-      "click",
+      'click',
       this.stopBtnHandler.bind(this)
     );
     this.resultCard.gotoHome.addEventListener(
-      "click",
+      'click',
       this.hideResultCard.bind(this)
     );
   }
@@ -92,29 +93,30 @@ class QuizElementsHelper {
     this.quizCard.titleElm.innerText = this.quiz.title;
     this.quizCard.descriptionElm.innerText = this.quiz.description;
     this.quizCard.metaQCElm.innerText = this.quiz._questions.length;
-    this.quizCard.metaTimeElm.innerText = this.quiz._time;
-
-    this.quizCard.classList.add("show");
+    this.quizCard.metaTimeElm.innerText = `${this.quiz._time}s`;
+    this.quizCard.image.src = this.quiz._image;
+    console.log(quiz);
+    this.quizCard.classList.add('show');
   }
 
   // Hide the quiz card
   hideQuizCard() {
-    this.quizCard.classList.remove("show");
+    this.quizCard.classList.remove('show');
   }
 
   // Show the question card
   showQuestionsCard() {
     this.hideQuizCard();
 
-    this.questionCard.classList.add("show");
-    this.questionCard.classList.remove("time-over");
+    this.questionCard.classList.add('show');
+    this.questionCard.classList.remove('time-over');
 
     this.startQuiz();
   }
 
   // Hide the question card
   hideQuestionsCard() {
-    this.questionCard.classList.remove("show");
+    this.questionCard.classList.remove('show');
   }
 
   // Handle the visibility of the result card
@@ -123,13 +125,17 @@ class QuizElementsHelper {
 
     if (this.resultCard.scoreElm && result)
       this.resultCard.scoreElm.innerText = Math.floor(result.score * 10) / 10;
+    this.resultCard.scoreAdd.innerText = `${
+      Math.floor(result.score * 10) / 10 > 5 ? 'Great job!' : 'Try again!'
+    }`;
+    console.log(result);
 
-    this.resultCard.classList.add("show");
+    this.resultCard.classList.add('show');
   }
 
   // Hide the result card
   hideResultCard() {
-    this.resultCard.classList.remove("show");
+    this.resultCard.classList.remove('show');
     this.showQuizCard();
   }
 
@@ -142,7 +148,7 @@ class QuizElementsHelper {
       this.parseNextQuestion(firstQuestion);
     }
 
-    this.questionCard.nextBtn.innerText = "Next";
+    this.questionCard.nextBtn.innerText = 'Next';
 
     this._setProgressTicker();
   }
@@ -161,13 +167,13 @@ class QuizElementsHelper {
         let progressPercent =
           ((qTime.quizTime - qTime.elapsedTime) * 100) / qTime.quizTime;
         if (progressPercent < 0) progressPercent = 0;
-        this.questionCard.progressbarElm.style.width = progressPercent + "%";
+        this.questionCard.progressbarElm.style.width = progressPercent + '%';
       }
 
       // Clear & stop interval when time over
       if (qTime.timeOver) {
-        this.questionCard.classList.add("time-over");
-        this.questionCard.nextBtn.innerText = "Show Result";
+        this.questionCard.classList.add('time-over');
+        this.questionCard.nextBtn.innerText = 'Show Result';
         clearInterval(this.remainingTimeInterval);
       }
     }, 1000);
@@ -176,13 +182,14 @@ class QuizElementsHelper {
   // This method putting the question in the question card
   parseNextQuestion(question) {
     const selectedOption = document.querySelector(
-      "input[name=question-option]:checked"
+      'input[name=question-option]:checked'
     );
 
-    this.questionCard.progressQuestionCountElm.innerText = `Question ${this.quiz
-      ._currentQuestionIndex + 1}/${this.quiz._questions.length}`;
+    this.questionCard.progressQuestionCountElm.innerText = `Question ${
+      this.quiz._currentQuestionIndex + 1
+    }/${this.quiz._questions.length}`;
     this.questionCard.questionTitleElm.setAttribute(
-      "data-qn",
+      'data-qn',
       `Q ${this.quiz._currentQuestionIndex + 1}:`
     );
     this.questionCard.questionTitleElm.innerText = question.title;
@@ -202,14 +209,14 @@ class QuizElementsHelper {
     clearInterval(this.remainingTimeInterval);
 
     this.resultCard.scoreElm.innerText = 0;
-    this.questionCard.progressRemainingTimeElm.innerText = "00:00";
-    this.questionCard.progressbarElm.style.width = "100%";
+    this.questionCard.progressRemainingTimeElm.innerText = '00:00';
+    this.questionCard.progressbarElm.style.width = '100%';
   }
 
   // This will call when next button clicked
   nextBtnHandler() {
     const selectedOption = document.querySelector(
-      "input[name=question-option]:checked"
+      'input[name=question-option]:checked'
     );
 
     let result;
