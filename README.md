@@ -1,15 +1,17 @@
-<h1 align="center">JAVASCRIPT QUIZ APP</h1>
+<h1 align="center">QUIZ APP</h1>
 
 ## About The Project
 
-JAVASCRIPT QUIZ APP is a simple project to create quizes. It based on [Quizzler app](https://github.com/wasimreja/Quizzler).
+QUIZ APP is a simple project to create quizes. It based on [Quizzler app](https://github.com/wasimreja/Quizzler).
+You can customize it and add your own questions.
 
 ## Tech Stack
 
-- [HTML](https://html.spec.whatwg.org/multipage/)
-- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
-- [JavaScript](https://www.javascript.com/)
+- HTML
+- CSS
+- JavaScript
 
-## Screenshot
+## How it looks like
 
-![Web capture_1-6-2022_11458_quizzler vercel app](https://user-images.githubusercontent.com/77227201/171272405-67066914-8aa0-471f-8247-3becabdbeda1.jpeg)
+![](https://user-images.githubusercontent.com/14938482/175976560-5b620fce-bebc-41ed-b29f-563aa581a8b7.mov)
+
