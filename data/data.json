@@ -1,17 +1,17 @@
 {
   "questions": [
     {
-      "title": "Which one is the type of a javascript file?",
+      "question": "Which one is the type of a javascript file?",
       "options": [".ts", ".js", ".jsx", ".j"],
       "answerId": 1
     },
     {
-      "title": "Inside which HTML element do we put the JavaScript?",
+      "question": "Inside which HTML element do we put the JavaScript?",
       "options": ["<scripting>", "<script>", "<js>", "<javascript>"],
       "answerId": 1
     },
     {
-      "title": "Where is the correct place to insert a JavaScript?",
+      "question": "Where is the correct place to insert a JavaScript?",
       "options": [
         "The <head> section",
         "Both the <head> section and the <body> section are correct",
@@ -21,7 +21,7 @@
       "answerId": 0
     },
     {
-      "title": "What is the correct syntax for referring to an external script called \"myScript.js\"?",
+      "question": "What is the correct syntax for referring to an external script called \"myScript.js\"?",
       "options": [
         "<script src=\"myScript.js\" type=\"text/javascript\"</script>",
         "<script name=\"myScript.js\" type=\"text/javascript\"</script>",
@@ -31,7 +31,7 @@
       "answerId": 3
     },
     {
-      "title": "How do you write \"I'm JavaScript\" in an alert box?",
+      "question": "How do you write \"I'm JavaScript\" in an alert box?",
       "options": [
         "msgBox(\"I'm JavaScript!\")",
         "alert(\"I'm JavaScript!\")",
@@ -41,7 +41,7 @@
       "answerId": 1
     },
     {
-      "title": "How do you create a function in JavaScript?",
+      "question": "How do you create a function in JavaScript?",
       "options": [
         "function = myFunction()",
         "function myFunction()",
@@ -51,7 +51,7 @@
       "answerId": 1
     },
     {
-      "title": "How do you call a function named \"myFunction\"?",
+      "question": "How do you call a function named \"myFunction\"?",
       "options": [
         "call function myFunction()",
         "call myFunction()",
@@ -61,7 +61,7 @@
       "answerId": 3
     },
     {
-      "title": "How do you create a function in JavaScript?",
+      "question": "How do you create a function in JavaScript?",
       "options": [
         "function = myFunction()",
         "function myFunction()",
@@ -71,7 +71,7 @@
       "answerId": 1
     },
     {
-      "title": "How do you call a function named \"myFunction\"?",
+      "question": "How do you call a function named \"myFunction\"?",
       "options": [
         "call function myFunction()",
         "call myFunction()",
@@ -80,7 +80,7 @@
       ]
     }
   ],
-  "title": "My Quiz",
+  "question": "My Quiz",
   "description": "This is a test quiz to test your knowledge",
   "time": 60,
   "questionsCount": 5,

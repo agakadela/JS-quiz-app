@@ -192,7 +192,7 @@ class QuizElementsHelper {
       'data-qn',
       `Q ${this.quiz._currentQuestionIndex + 1}:`
     );
-    this.questionCard.questionTitleElm.innerText = question.title;
+    this.questionCard.questionTitleElm.innerText = question.question;
 
     this.questionCard.optionOneElm.innerText = question.options[0];
     this.questionCard.optionTwoElm.innerText = question.options[1];

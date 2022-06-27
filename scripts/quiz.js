@@ -22,12 +22,12 @@ class Quiz {
     this._questionsCount = questionsCount;
   }
 
-  addQuestion(answer, title, options) {
+  addQuestion(answer, question, options) {
     if (this._startTime) {
       alert('Question can not added on a started quiz.');
       return;
     }
-    this._questions.push({ answer, title, options });
+    this._questions.push({ answer, question, options });
   }
 
   // Start the quiz
@@ -111,7 +111,7 @@ class Quiz {
       .slice(0, this._questionsCount)
       .map((q) => ({
         answerId: q.answerId,
-        title: q.title,
+        question: q.question,
         options: q.options,
       }));
   }
