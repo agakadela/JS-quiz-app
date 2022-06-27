@@ -3,7 +3,7 @@
 ## About The Project
 
 QUIZ APP is a simple project to create quizes. It based on [Quizzler app](https://github.com/wasimreja/Quizzler).
-You can customize it and add your own questions.
+You can customize it and add your own questions. It is made within the [Coder Woman project](https://coderwoman.com).
 
 ## Tech Stack
 
