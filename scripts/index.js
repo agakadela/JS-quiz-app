@@ -10,9 +10,15 @@ let quiz;
 function initApp() {
   fetch('data/data.json')
     .then((response) => response.json())
-    .then(({ title, description, time, questions, image }) => {
-      quiz = new Quiz(title, description, time, questions, image);
-
+    .then(({ title, description, time, questions, image, questionsCount }) => {
+      quiz = new Quiz(
+        title,
+        description,
+        time,
+        questions,
+        image,
+        questionsCount
+      );
       new QuizElementsHelper(app, quizCard, questionsCard, resultCard, quiz);
     });
 }

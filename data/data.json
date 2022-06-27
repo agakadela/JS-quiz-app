@@ -2,11 +2,13 @@
   "questions": [
     {
       "title": "Which one is the type of a javascript file?",
-      "options": [".ts", ".js", ".jsx", ".j"]
+      "options": [".ts", ".js", ".jsx", ".j"],
+      "answerId": 1
     },
     {
       "title": "Inside which HTML element do we put the JavaScript?",
-      "options": ["<scripting>", "<script>", "<js>", "<javascript>"]
+      "options": ["<scripting>", "<script>", "<js>", "<javascript>"],
+      "answerId": 1
     },
     {
       "title": "Where is the correct place to insert a JavaScript?",
@@ -15,47 +17,72 @@
         "Both the <head> section and the <body> section are correct",
         "The <body> section",
         "Anywhere in the HTML document"
-      ]
+      ],
+      "answerId": 0
     },
     {
-      "title": "What is the correct syntax for referring to an external script called 'xxx.js'?",
+      "title": "What is the correct syntax for referring to an external script called \"myScript.js\"?",
       "options": [
-        "<script name='xxx.js'>",
-        "<script src='xxx.js'>",
-        "<script link='xxx.js'>",
-        "<script href='xxx.js'>"
-      ]
+        "<script src=\"myScript.js\" type=\"text/javascript\"</script>",
+        "<script name=\"myScript.js\" type=\"text/javascript\"</script>",
+        "<script href=\"myScript.js\" type=\"text/javascript\"</script>",
+        "<script src=\"myScript.js\" type=\"text/javascript\"</script>"
+      ],
+      "answerId": 3
     },
     {
-      "title": "How do you write 'Hello World' in an alert box?",
+      "title": "How do you write \"I'm JavaScript\" in an alert box?",
       "options": [
-        "msg('Hello World');",
-        "alert('Hello World');",
-        "msgBox('Hello World');",
-        "console.log('Hello World');"
-      ]
+        "msgBox(\"I'm JavaScript!\")",
+        "alert(\"I'm JavaScript!\")",
+        "msg(\"I'm JavaScript!\")",
+        "alertBox(\"I'm JavaScript!\")"
+      ],
+      "answerId": 1
     },
     {
-      "title": "How do you create a normal function in JavaScript?",
+      "title": "How do you create a function in JavaScript?",
       "options": [
-        "function:myFunction()",
+        "function = myFunction()",
         "function myFunction()",
-        "function* myFunction()",
-        "function = myFunction()"
-      ]
+        "function:myFunction()",
+        "function myFunction()"
+      ],
+      "answerId": 1
     },
     {
-      "title": "How do you call a function named 'myFunction'?",
+      "title": "How do you call a function named \"myFunction\"?",
       "options": [
+        "call function myFunction()",
         "call myFunction()",
         "myFunction()",
-        "call:myFunction()",
-        "alo myFunction()"
+        "myFunction call()"
+      ],
+      "answerId": 3
+    },
+    {
+      "title": "How do you create a function in JavaScript?",
+      "options": [
+        "function = myFunction()",
+        "function myFunction()",
+        "function:myFunction()",
+        "function myFunction()"
+      ],
+      "answerId": 1
+    },
+    {
+      "title": "How do you call a function named \"myFunction\"?",
+      "options": [
+        "call function myFunction()",
+        "call myFunction()",
+        "myFunction()",
+        "myFunction call()"
       ]
     }
   ],
-  "title": "JavaScript Quiz",
-  "description": "Test your JavaScript knowledge",
+  "title": "My Quiz",
+  "description": "This is a test quiz to test your knowledge",
   "time": 60,
-  "image": "img/Untitled design.png"
+  "questionsCount": 5,
+  "image": "img/default.jpg"
 }

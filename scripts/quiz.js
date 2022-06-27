@@ -4,7 +4,7 @@ let TIME_OVER_SYM = Symbol('TO');
 let TIMER_INTERVAL_SYM = Symbol('TI');
 
 class Quiz {
-  constructor(title, description, time, questions = [], image) {
+  constructor(title, description, time, questions = [], image, questionsCount) {
     if (!title) throw new Error('Title of quiz is required.');
 
     if (!description) throw new Error('Description of quiz is required.');
@@ -19,35 +19,32 @@ class Quiz {
     this[TIMER_INTERVAL_SYM] = null;
     this._questions = questions;
     this._image = image;
+    this._questionsCount = questionsCount;
   }
 
-  addQuestion(title, options) {
+  addQuestion(answer, title, options) {
     if (this._startTime) {
-      console.log('Question can not added on a started quiz.');
+      alert('Question can not added on a started quiz.');
       return;
     }
-
-    let id = this._questions.length;
-    this._questions.push({ id, title, options });
+    this._questions.push({ answer, title, options });
   }
 
   // Start the quiz
   start() {
     if (!this._questions.length) {
-      console.log('There is not any question');
+      alert('There is not any question');
       return;
     }
 
     if (this._startTime) {
-      console.log('Already started.');
+      alert('Already started.');
       return;
     }
 
-    this.reset();
     this._startTime = new Date().getTime();
 
     this._setTicker();
-
     return this.currentQuestion;
   }
 
@@ -61,7 +58,7 @@ class Quiz {
   // This will return the head question of running quiz
   get currentQuestion() {
     if (!this._startTime) {
-      console.log('Quiz not started');
+      alert('Quiz not started');
       return;
     }
 
@@ -71,7 +68,7 @@ class Quiz {
   // Get the result of running quiz
   result() {
     if (!this._startTime) {
-      console.log('Quiz not started.');
+      alert('Quiz not started.');
       return;
     }
 
@@ -97,7 +94,7 @@ class Quiz {
   // Reset the running quiz status and make it ready to start again
   reset() {
     if (this._startTime && !this._endTime) {
-      console.log('Can not reset the running quiz.');
+      alert('Can not reset the running quiz.');
       return;
     }
 
@@ -108,17 +105,20 @@ class Quiz {
     this[TIME_OVER_SYM] = false;
     clearInterval(this[TIMER_INTERVAL_SYM]);
 
-    this._questions = this._questions.map((q) => ({
-      id: q.id,
-      title: q.title,
-      options: q.options,
-    }));
+    this._questions = this._questions
+      .sort(() => 0.5 - Math.random())
+      .slice(0, this._questionsCount)
+      .map((q) => ({
+        answerId: q.answerId,
+        title: q.title,
+        options: q.options,
+      }));
   }
 
   // Answer the head question of the running quiz with a selected option
   answerCurrentQuestion(option) {
     if (!this._startTime) {
-      console.log('Start the quiz first');
+      alert('Start the quiz first');
       return;
     }
 
@@ -130,17 +130,16 @@ class Quiz {
     if (!this[TIME_OVER_SYM]) {
       const currentQ = this.currentQuestion;
       if (currentQ.skip !== void 0) {
-        console.log('You already skipped this question');
+        alert('You already skipped this question');
         return;
       }
       if (currentQ.answer !== void 0) {
-        console.log('You already answered this question');
+        alert('You already answered this question');
         return;
       }
       currentQ.answer = option;
-      const answerResult = checkAnswerValidity(currentQ.id, option);
+      const answerResult = checkAnswerValidity(currentQ.answerId, option);
       currentQ.result = answerResult;
-
       response.answerResult = answerResult;
 
       if (!response.finished) {
@@ -162,7 +161,7 @@ class Quiz {
   // Skip the head question and pick next question if exist
   skipCurrentQuestion() {
     if (!this._startTime) {
-      console.log('Start the quiz first');
+      alert('Start the quiz first');
       return;
     }
 
@@ -174,11 +173,11 @@ class Quiz {
     if (!this[TIME_OVER_SYM]) {
       const currentQ = this.currentQuestion;
       if (currentQ.skip !== void 0) {
-        console.log('You already skipped this question');
+        alert('You already skipped this question');
         return;
       }
       if (currentQ.answer !== void 0) {
-        console.log('You already answered this question');
+        alert('You already answered this question');
         return;
       }
       currentQ.skip = true;
@@ -220,12 +219,12 @@ class Quiz {
   // Control the ticker of the time of the running quiz
   _setTicker() {
     if (!this._startTime) {
-      console.log('Quiz not started yet.');
+      alert('Quiz not started yet.');
       return;
     }
 
     if (this[TIMER_INTERVAL_SYM]) {
-      console.log('The ticker has been set before');
+      alert('The ticker has been set before');
       return;
     }
 
@@ -245,18 +244,18 @@ class Quiz {
 // Private function to ask next question
 function askNextQuestion() {
   if (!this._startTime) {
-    console.log('Quiz not started');
+    alert('Quiz not started');
     return;
   }
 
   const currentQ = this.currentQuestion;
   if (currentQ.answer === void 0 && currentQ.skip === void 0) {
-    console.log('Current question answered or skipped.');
+    alert('Current question answered or skipped.');
     return;
   }
 
   if (this.isOnLastQuestion()) {
-    console.log('No more question.');
+    alert('No more question.');
     return;
   }
 
@@ -265,10 +264,7 @@ function askNextQuestion() {
 
 // Check the validity of the selected option
 function checkAnswerValidity(questionID, option) {
-  // Every checking could be apply here but
-  // the correct answer is the second option in
-  // my questions because of its simplicity
-  return +option === 1;
+  return parseInt(questionID) === parseInt(option);
 }
 
 // Convert number (in second) to time-string

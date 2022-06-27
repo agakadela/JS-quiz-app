@@ -14,7 +14,6 @@ class QuizElementsHelper {
     // Initialize the listeners
     this.initListeners();
 
-    // Show quiz details card
     this.showQuizCard();
   }
 
@@ -90,6 +89,7 @@ class QuizElementsHelper {
   }
 
   showQuizCard() {
+    this.startQuiz();
     this.quizCard.titleElm.innerText = this.quiz.title;
     this.quizCard.descriptionElm.innerText = this.quiz.description;
     this.quizCard.metaQCElm.innerText = this.quiz._questions.length;
@@ -109,8 +109,6 @@ class QuizElementsHelper {
 
     this.questionCard.classList.add('show');
     this.questionCard.classList.remove('time-over');
-
-    this.startQuiz();
   }
 
   // Hide the question card
@@ -123,11 +121,13 @@ class QuizElementsHelper {
     this.hideQuestionsCard();
 
     if (this.resultCard.scoreElm && result)
-      this.resultCard.scoreElm.innerText = Math.floor(result.score * 10) / 10;
+      // result is in %
+      this.resultCard.scoreElm.innerText = `${
+        Math.floor(result?.score * 10) / 10
+      }%`;
     this.resultCard.scoreAdd.innerText = `${
-      Math.floor(result.score * 10) / 10 > 5 ? 'Great job!' : 'Try again!'
+      Math.floor(result?.score * 10) / 10 > 50 ? 'Great job!' : 'Try again!'
     }`;
-    console.log(result);
 
     this.resultCard.classList.add('show');
   }
@@ -183,7 +183,6 @@ class QuizElementsHelper {
     const selectedOption = document.querySelector(
       'input[name=question-option]:checked'
     );
-
     this.questionCard.progressQuestionCountElm.innerText = `Question ${
       this.quiz._currentQuestionIndex + 1
     }/${this.quiz._questions.length}`;
@@ -225,11 +224,29 @@ class QuizElementsHelper {
       result = this.quiz.answerCurrentQuestion(selectedOption.value);
     }
 
-    if (result.finished || result.timeOver) {
-      this.showResultCard(result.result);
-    } else if (result) {
-      this.parseNextQuestion(result.nextQ);
+    if (selectedOption) {
+      selectedOption.parentElement.style.backgroundColor = result.answerResult
+        ? '#32CD32'
+        : '#FF0000';
+      selectedOption.parentElement.style.animation =
+        'blink .5s linear infinite';
     }
+
+    this.questionCard.nextBtn.disabled = true;
+    setTimeout(() => {
+      if (result.finished || result.timeOver) {
+        this.showResultCard(result.result);
+      } else if (result) {
+        this.parseNextQuestion(result.nextQ);
+      }
+
+      if (selectedOption) {
+        selectedOption.parentElement.style.removeProperty('background-color');
+        selectedOption.parentElement.style.removeProperty('animation');
+      }
+
+      this.questionCard.nextBtn.disabled = false;
+    }, 1500);
   }
 
   // This will call when stop button clicked
