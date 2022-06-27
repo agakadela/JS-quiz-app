@@ -80,7 +80,7 @@
       ]
     }
   ],
-  "question": "My Quiz",
+  "title": "My Quiz",
   "description": "This is a test quiz to test your knowledge",
   "time": 60,
   "questionsCount": 5,
