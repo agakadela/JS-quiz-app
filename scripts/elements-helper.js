@@ -89,7 +89,7 @@ class QuizElementsHelper {
   }
 
   showQuizCard() {
-    this.startQuiz();
+    this.quiz.prepareQuestions();
     this.quizCard.titleElm.innerText = this.quiz.title;
     this.quizCard.descriptionElm.innerText = this.quiz.description;
     this.quizCard.metaQCElm.innerText = this.quiz._questions.length;
@@ -109,6 +109,8 @@ class QuizElementsHelper {
 
     this.questionCard.classList.add('show');
     this.questionCard.classList.remove('time-over');
+
+    this.startQuiz();
   }
 
   // Hide the question card
@@ -205,9 +207,9 @@ class QuizElementsHelper {
   resetPreviousQuiz() {
     this.quiz.stop();
     clearInterval(this.remainingTimeInterval);
-
     this.resultCard.scoreElm.innerText = 0;
-    this.questionCard.progressRemainingTimeElm.innerText = '00:00';
+    this.questionCard.progressRemainingTimeElm.innerText =
+      this.quiz.secToTimeStr(this.quiz._time);
     this.questionCard.progressbarElm.style.width = '100%';
   }
 

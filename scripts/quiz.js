@@ -36,7 +36,6 @@ class Quiz {
       alert('There is not any question');
       return;
     }
-
     if (this._startTime) {
       alert('Already started.');
       return;
@@ -104,7 +103,9 @@ class Quiz {
     this._currentQuestionIndex = 0;
     this[TIME_OVER_SYM] = false;
     clearInterval(this[TIMER_INTERVAL_SYM]);
+  }
 
+  prepareQuestions() {
     this._questions = this._questions
       .sort(() => 0.5 - Math.random())
       .slice(0, this._questionsCount)
@@ -203,6 +204,23 @@ class Quiz {
     return this._currentQuestionIndex + 1 >= this._questions.length;
   }
 
+  secToTimeStr(seconds) {
+    let timeInHour = Math.floor(seconds / 3600);
+    let timeInMin = Math.floor((seconds % 3600) / 60);
+    let timeInSec = Math.floor(seconds % 60);
+
+    if (timeInHour < 10) timeInHour = `0${timeInHour}`;
+
+    if (timeInMin < 10) timeInMin = `0${timeInMin}`;
+
+    if (timeInSec < 10) timeInSec = `0${timeInSec}`;
+
+    let timeStr = `${timeInMin}:${timeInSec}`;
+    if (parseInt(timeInHour)) timeStr = `${timeInHour}:${timeStr}`;
+
+    return timeStr;
+  }
+
   // Get the details of the timing of the quiz
   get timeDetails() {
     let now = new Date().getTime();
@@ -211,7 +229,7 @@ class Quiz {
       start: this._startTime,
       end: this._endTime,
       elapsedTime: ((this._endTime || now) - this._startTime) / 1000, // ms to sec
-      remainingTime: secToTimeStr(this._remainingTime),
+      remainingTime: this.secToTimeStr(this._remainingTime),
       timeOver: this[TIME_OVER_SYM],
     };
   }
@@ -265,22 +283,4 @@ function askNextQuestion() {
 // Check the validity of the selected option
 function checkAnswerValidity(questionID, option) {
   return parseInt(questionID) === parseInt(option);
-}
-
-// Convert number (in second) to time-string
-function secToTimeStr(seconds) {
-  let timeInHour = Math.floor(seconds / 3600);
-  let timeInMin = Math.floor((seconds % 3600) / 60);
-  let timeInSec = Math.floor(seconds % 60);
-
-  if (timeInHour < 10) timeInHour = `0${timeInHour}`;
-
-  if (timeInMin < 10) timeInMin = `0${timeInMin}`;
-
-  if (timeInSec < 10) timeInSec = `0${timeInSec}`;
-
-  let timeStr = `${timeInMin}:${timeInSec}`;
-  if (parseInt(timeInHour)) timeStr = `${timeInHour}:${timeStr}`;
-
-  return timeStr;
 }
