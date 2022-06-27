@@ -24,6 +24,7 @@ Download the project from [GitHub](https://github.com/agakadela/JS-quiz-app/arch
 ## Configuration
 
 You can configure the project by editing the `data.json` file.
+Every time you run the project, questions array will be shuffled, so every time you run the project, you will get different questions.
 
 1. Add your **questions** to the `data.json` file.
    It is a set of objects. Each object has the following properties:
