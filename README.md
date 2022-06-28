@@ -145,7 +145,7 @@ Every time you run the project, questions array will be shuffled, so every time 
         "function = myFunction()",
         "function myFunction()",
         "function:myFunction()",
-        "function myFunction()"
+        "myFunction()"
       ],
       "answerId": 1
     },
